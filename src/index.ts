@@ -4,64 +4,23 @@
  * @author Faiz A. Farooqui <faiz@geekyants.com>
  */
 
-import * as os from 'os';
-import * as cluster from 'cluster';
+import * as os from "os";
+import * as cluster from "cluster";
 
-import App from './providers/App';
-import NativeEvent from './exception/NativeEvent';
+import App from "./providers/App";
+import NativeEvent from "./exception/NativeEvent";
 
-if (cluster.isMaster) {
-	/**
-	 * Catches the process events
-	 */
-	NativeEvent.process();
+// if (cluster.isMaster) {
+//   NativeEvent.process();
+//   App.clearConsole();
+//   App.loadConfiguration();
+//   const CPUS: any = os.cpus();
+//   CPUS.forEach(() => cluster.fork());
+//   NativeEvent.cluster(cluster);
+//   App.loadQueue();
+// 	setTimeout(() => App.loadWorker(), 1000 * 60);
 
-	/**
-	 * Clear the console before the app runs
-	 */
-	App.clearConsole();
-
-	/**
-	 * Load Configuration
-	 */
-	App.loadConfiguration();
-
-	/**
-	 * Find the number of available CPUS
-	 */
-	const CPUS: any = os.cpus();
-
-	/**
-	 * Fork the process, the number of times we have CPUs available
-	 */
-	CPUS.forEach(() => cluster.fork());
-
-	/**
-	 * Catches the cluster events
-	 */
-	NativeEvent.cluster(cluster);
-
-	/**
-	 * Loads the Queue Monitor iff enabled
-	 */
-	App.loadQueue();
-
-	/**
-	 * Run the Worker every minute
-	 * Note: we normally start worker after
-	 * the entire app is loaded
-	 */
-	setTimeout(() => App.loadWorker(), 1000 * 60);
-
-} else {
-
-	/**
-	 * Run the Database pool
-	 */
-	App.loadDatabase();
-
-	/**
-	 * Run the Server on Clusters
-	 */
-	App.loadServer();
-}
+// }else {
+// App.loadDatabase();
+App.loadServer();
+// }

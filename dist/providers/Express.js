@@ -49,9 +49,9 @@ class Express {
         // Start the server on the specified port
         this.express.listen(port, (_error) => {
             if (_error) {
-                return console.log('Error: ', _error);
+                return console.log("Error: ", _error);
             }
-            return console.log('\x1b[33m%s\x1b[0m', `Server :: Running @ 'http://localhost:${port}'`);
+            return console.log("\x1b[33m%s\x1b[0m", `Server :: Running @ 'http://localhost:${port}'`);
         });
     }
 }
